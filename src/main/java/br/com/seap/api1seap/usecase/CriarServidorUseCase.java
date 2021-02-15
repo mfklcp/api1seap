@@ -22,7 +22,6 @@ public class CriarServidorUseCase {
     @Autowired
     private CargoRepository cargoRepository;
 
-
     public Servidor executar(Servidor servidor){
         Set<Long> ids = servidor.getListCargos().stream().map(Cargo::getId).collect(Collectors.toSet());
         Set<Cargo> cargos = new HashSet<>(cargoRepository.findAllById(ids));

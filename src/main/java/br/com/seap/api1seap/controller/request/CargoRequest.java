@@ -8,7 +8,6 @@ public class CargoRequest {
 
     private Long id;
 
-
     public Cargo convert() {
         Cargo cargo = new Cargo();
         cargo.setId(id);

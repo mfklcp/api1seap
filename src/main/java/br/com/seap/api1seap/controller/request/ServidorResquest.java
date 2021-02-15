@@ -1,16 +1,14 @@
-package br.com.seap.api1seap.controller.form;
+package br.com.seap.api1seap.controller.request;
 
 import br.com.seap.api1seap.controller.request.CargoRequest;
-import br.com.seap.api1seap.model.Cargo;
 import br.com.seap.api1seap.model.Servidor;
 import lombok.Data;
-import lombok.Setter;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
-public class ServidorForm {
+public class ServidorResquest {
 
     private String nome;
     private String matricula;

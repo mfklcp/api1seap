@@ -1,4 +1,4 @@
-package br.com.seap.api1seap.controller.form;
+package br.com.seap.api1seap.controller.request;
 
 import br.com.seap.api1seap.controller.request.CargoRequest;
 import br.com.seap.api1seap.model.Cargo;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class PutServidorForm {
+public class AtualizaServidorRequest {
 
     private String nome;
     private String matricula;
