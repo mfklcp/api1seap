@@ -15,13 +15,14 @@ import java.util.Set;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cargo {
 
-    //@SequenceGenerator(name="servidor_idcargo_seq", sequenceName = "servidor_idcargor_seq", allocationSize=1)
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "servidor_idcargo_seq")
+//    @SequenceGenerator(name="servidor_idcargo_seq", sequenceName = "servidor_idcargor_seq", allocationSize=1)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "servidor_idcargo_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cargo", updatable = false)
     private Long id;
+
     private String descricao;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

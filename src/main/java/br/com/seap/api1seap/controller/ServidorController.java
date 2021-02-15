@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import javax.xml.ws.Service;
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/servidor")
 @RestController
@@ -44,7 +46,6 @@ public class ServidorController {
     }
 
     @PostMapping
-    @Transactional //Toda modificacao precisa
     public ResponseEntity<ServidorResponse> post(@RequestBody ServidorResquest servidorResquest, UriComponentsBuilder uriBuilder) {
 
         Servidor servidor = servidorResquest.converter();
@@ -55,16 +56,20 @@ public class ServidorController {
     }
 
     @PutMapping("/{id}")
-    @Transactional
     public ResponseEntity<ServidorResponse> put(@PathVariable Long id, @RequestBody AtualizaServidorRequest atualizaServidorRequest) {
+        Optional<Servidor> servidor = buscarServidorUseCase.executar(id);
+        Servidor servidor1 = new Servidor();
 
-        return buscarServidorUseCase.executar(id).map
-                (value -> ResponseEntity.ok(new ServidorResponse(atualizarServidorUseCase.executar(value, atualizaServidorRequest))))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        if (servidor.isPresent()){
+            servidor1 = atualizaServidorRequest.atualiza(servidor.get());
+        }
+
+        atualizarServidorUseCase.executar(servidor1);
+
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
-    @Transactional
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return buscarServidorUseCase.executar(id).map(value -> {
                     detelarServidorUseCase.executar(value.getId());
