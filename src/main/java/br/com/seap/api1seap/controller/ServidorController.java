@@ -5,19 +5,16 @@ import br.com.seap.api1seap.controller.form.PutServidorForm;
 import br.com.seap.api1seap.controller.form.ServidorForm;
 import br.com.seap.api1seap.model.Servidor;
 import br.com.seap.api1seap.repository.ServidorRepository;
-import jdk.nashorn.internal.ir.CallNode;
+import br.com.seap.api1seap.usecase.CriarServidorUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import javax.transaction.Transactional;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 @RequestMapping("/servidor")
 @RestController
@@ -25,6 +22,9 @@ public class ServidorController {
 
     @Autowired
     private ServidorRepository servidorRepository;
+
+    @Autowired
+    private CriarServidorUseCase criarServidorUseCase;
 
     @GetMapping
     public List<ServidorDto> getAll(){
@@ -44,7 +44,7 @@ public class ServidorController {
     public ResponseEntity<ServidorDto> post(@RequestBody ServidorForm servidorForm, UriComponentsBuilder uriBuilder){
         Servidor servidor = servidorForm.converter();
 
-        servidorRepository.save(servidor);
+        criarServidorUseCase.executar(servidor);
 
         servidor.getListCargos().forEach(a -> System.out.println(a.getDescricao()));
 

@@ -25,7 +25,7 @@ public class Cargo {
     private String descricao;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToMany(mappedBy = "listCargos", cascade=CascadeType.ALL)
+    @ManyToMany(mappedBy = "listCargos", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Servidor> listServidores = new HashSet<Servidor>();
 
     public Cargo(String descricao){

@@ -1,6 +1,7 @@
 package br.com.seap.api1seap.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,8 +14,7 @@ import java.util.Set;
 
 import br.com.seap.api1seap.model.Cargo;
 
-@Getter
-@Setter
+@Data
 @EqualsAndHashCode (onlyExplicitlyIncluded = true)
 @Entity(name = "tb_servidor")
 public class Servidor {
@@ -33,7 +33,7 @@ public class Servidor {
     //            joinColumns={@JoinColumn(name="servidor_id")},
     //            inverseJoinColumns={@JoinColumn(name="cargo_id")})
     @JoinTable
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cargo> listCargos = new HashSet<Cargo>();
 
     public Servidor(String nome, String matricula, Set<Cargo> cargos) {
