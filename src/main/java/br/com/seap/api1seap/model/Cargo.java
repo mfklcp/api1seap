@@ -1,22 +1,22 @@
 package br.com.seap.api1seap.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Setter
-@Getter
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity(name = "tb_cargo")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Cargo {
 
-//    @SequenceGenerator(name="servidor_idcargo_seq", sequenceName = "servidor_idcargor_seq", allocationSize=1)
-//    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "servidor_idcargo_seq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     @Id
@@ -25,14 +25,8 @@ public class Cargo {
 
     private String descricao;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToMany(mappedBy = "listCargos", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "listCargos", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Servidor> listServidores = new HashSet<Servidor>();
 
-    public Cargo(String descricao){
-        this.descricao = descricao;
-    }
-
-    public Cargo(){}
 }
 
