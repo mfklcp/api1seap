@@ -14,6 +14,6 @@ public class BuscarServidoreUseCase {
     private ServidorRepository servidorRepository;
 
     public Optional<Servidor> executar(Long id) {
-        return servidorRepository.findOneById(id);
+        return servidorRepository.findById(id);
     }
 }

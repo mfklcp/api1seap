@@ -15,12 +15,11 @@ public class AtualizaServidorRequest {
     private String matricula;
     private Set<CargoRequest> listCargos;
 
-    public Servidor atualiza(Servidor servidor) {
-
+    public Servidor convert() {
+        Servidor servidor = new Servidor();
         servidor.setNome(this.nome);
         servidor.setMatricula(this.matricula);
         servidor.setListCargos(this.listCargos.stream().map(CargoRequest::convert).collect(Collectors.toSet()));
-
         return servidor;
     }
 

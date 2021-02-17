@@ -1,19 +1,21 @@
 package br.com.seap.api1seap.controller.response;
 
 import br.com.seap.api1seap.model.Cargo;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CargoResponse {
 
+    private Long id;
     private String descricao;
 
-    private CargoResponse(Cargo cargo){
+    public CargoResponse(Cargo cargo) {
         this.descricao = cargo.getDescricao();
+        this.id = cargo.getId();
     }
 
-    public static List<CargoResponse> converteListaCargo(List<Cargo> listCargo) {
-        return listCargo.stream().map(CargoResponse::new).collect(Collectors.toList());
-    }
 }
